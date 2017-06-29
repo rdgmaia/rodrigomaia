@@ -1,0 +1,90 @@
+
+
+
+	
+
+
+
+
+<?xml version="1.0" encoding="utf-8"?> 
+<jnlp codebase="http://10.8.6.129:8081/" >
+  <information>
+    <title>CA Introscope Workstation 10.5.1.8</title>
+    <vendor>CA Technologies</vendor>
+   <description>Introscope Workstation</description>
+   <icon href="/images/ca_technologies_logo.png" />
+   <icon kind="splash" href="/images/ca_technologies_logo.png" />
+  </information>
+  <security>
+      <all-permissions/>
+  </security>
+  <resources>
+    <!-- Reference to the launcher jar. This does not change -->
+        <jar href="workstationProduct/plugins/com.ca.apm.introscope.workstation.webstart.launcher_10.5.1.jar" main="true"/>
+	    <jar href="workstationProduct/plugins/org.eclipse.equinox.launcher_1.0.101.R34x_v20080819.jar"/>
+    
+    <!-- Reference to all the plugins and features consituting the application -->
+	<extension name="Introscope Workstation" href="jnlp/com.wily.introscope.workstation.feature.jsp" />
+	<extension name="Eclipse Plugins" href="jnlp/eclipseplugins.jsp" />
+ 
+    <!-- Information usually specified in the config.ini -->
+    <property name="jnlp.eclipse.security" value="osgi"/>
+    <property 
+        name="jnlp.osgi.instance.area" 
+        value="@user.home/Application Data/Wily/Introscope/product/workstation"/>
+    <property 
+        name="jnlp.osgi.configuration.area" 
+        value="@user.home/Application Data/Wily/Introscope/product/workstation"/>
+
+    <!-- The id of the product to run, like found in the overview page of the product editor -->
+    <property 
+        name="jnlp.eclipse.product" 
+        value="com.wily.introscope.workstation.productWebstart"/>
+    
+    <!-- The Java version that will be used to launch the product. -->
+    <!-- Java version ranges are listed in preferred order from first to last. --> 
+    <!-- The client system will be checked for all version ranges, in the listed order. --> 
+    <!-- If the client system does not have any JVMs installed that match the listed    -->
+    <!-- version ranges, Webstart will download the newest available version permitted  -->
+    <!-- by all of the version ranges taken together, regardless of order. -->
+    <!-- So: when the j2se version is set to "1.7*"... -->
+    <!--   1) Webstart will first check the client system for Java 1.7.   --> 
+    <!--      1.7*      = version starts with 1.7           --> 
+    <!--   2) If a valid update level of Java 1.7 is not found, Webstart will download    -->
+    <!--      the newest available version permitted by any of the version ranges.        -->
+    <!--      So, as of this writing, Webstart would download 1.7 update 25 at this step. -->
+    <!--      As later updates of 1.7 are released, Webstart will download those instead. -->
+    <!--      It will never download Java 1.8 since the version range does not permit it. -->
+    <!-- CA Wily has deliberately chosen 1.7.0 as the minimum update level since this  -->
+    <!-- we assume Java 7 features are available. 					-->
+    <!-- Users can customize the ranges to allow other update levels at their own risk.   -->
+    <!-- If you edit the below version range list, be sure to edit the following file as well -->
+    <!-- to use an identical list: com.wily.introscope.workstation.feature_#.#.#.jsp, located -->
+    <!-- in the same directory as this file. --> 
+    <j2se version="1.7* 1.8*" 
+          java-vm-args="-Xms512m -Xmx1536m -Dsun.java2d.noddraw=true" 
+          href="http://java.sun.com/products/autodl/j2se"/>
+  	<property name="sun.java2d.noddraw" value="true"/>
+  </resources>
+  <!-- The name of the main class to execute. This does not change-->
+<!--  <application-desc main-class="org.eclipse.equinox.launcher.WebStartMain">-->
+  <application-desc main-class="com.ca.apm.introscope.workstation.webstart.launcher.LaunchWrapper">
+  
+    <argument>-noexit</argument>
+    <argument>-clean</argument>
+  
+	<argument>-loginhost</argument>
+	<argument>10.8.6.129</argument>
+	<argument>-loginport</argument>
+	<argument>5001</argument>
+	<argument>-autofill</argument>
+	<argument>true</argument>
+	<argument>-timezone</argument>
+	<argument>timezone</argument>
+	
+
+	<argument>-conmeth</argument>
+<argument>all</argument>
+
+  </application-desc>
+</jnlp>
